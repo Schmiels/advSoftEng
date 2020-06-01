@@ -170,13 +170,77 @@ public class Weather {
 			Element root = doc.createElement("weatherData");
 			doc.appendChild(root);
 			
+			Element general = doc.createElement("general");
+			root.appendChild(general);
+			
 			Element cityName = doc.createElement("cityName");
 			cityName.appendChild(doc.createTextNode(this.getCityName()));
-			root.appendChild(cityName);
+			general.appendChild(cityName);
 			
-			Element temp = doc.createElement("temp");
-			temp.appendChild(doc.createTextNode(this.getTemp()+""));
+			Element cityId = doc.createElement("cityId");
+			cityId.appendChild(doc.createTextNode(this.getCityId()+""));
+			general.appendChild(cityId);
+			
+			Element countryCode = doc.createElement("countryCode");
+			countryCode.appendChild(doc.createTextNode(this.getCountryCode()));
+			general.appendChild(countryCode);
+			
+			Element sunrise = doc.createElement("sunrise");
+			sunrise.appendChild(doc.createTextNode(this.getSunrise().toString()));
+			general.appendChild(sunrise);
+			
+			Element sunset = doc.createElement("sunset");
+			sunset.appendChild(doc.createTextNode(this.getSunset().toString()));
+			general.appendChild(sunset);
+			
+			Element coords = doc.createElement("coords");
+			root.appendChild(coords);
+			
+			Element lon = doc.createElement("lon");
+			lon.appendChild(doc.createTextNode(this.getLon()+""));
+			coords.appendChild(lon);
+			
+			Element lat = doc.createElement("lat");
+			lat.appendChild(doc.createTextNode(this.getLat()+""));
+			coords.appendChild(lat);
+			
+			Element desc = doc.createElement("desc");
+			desc.appendChild(doc.createTextNode(this.getWeatherDesc()));
+			root.appendChild(desc);
+			
+			Element temp = doc.createElement("temp");			
 			root.appendChild(temp);
+			
+			Element currentTemp = doc.createElement("currentTemp");
+			currentTemp.appendChild(doc.createTextNode(this.getTemp()+""));
+			temp.appendChild(currentTemp);
+			
+			Element maxTemp = doc.createElement("maxTemp");
+			maxTemp.appendChild(doc.createTextNode(this.getTempMax()+""));
+			temp.appendChild(maxTemp);
+			
+			Element minTemp = doc.createElement("minTemp");
+			minTemp.appendChild(doc.createTextNode(this.getTempMin()+""));
+			temp.appendChild(minTemp);
+			
+			Element humidity = doc.createElement("humidity");
+			humidity.appendChild(doc.createTextNode(this.getHumidity()+""));
+			root.appendChild(humidity);
+			
+			Element pressure = doc.createElement("pressure");
+			pressure.appendChild(doc.createTextNode(this.getPressure()+""));
+			root.appendChild(pressure);
+			
+			Element wind = doc.createElement("wind");
+			root.appendChild(wind);
+			
+			Element windDeg = doc.createElement("windDeg");
+			windDeg.appendChild(doc.createTextNode(this.getWindDeg()+""));
+			wind.appendChild(windDeg);
+			
+			Element windSpped = doc.createElement("windSpped");
+			windSpped.appendChild(doc.createTextNode(this.getWindSpeed()+""));
+			wind.appendChild(windSpped);
 			
 			TransformerFactory transformerFac = TransformerFactory.newInstance();
 			Transformer transformer = transformerFac.newTransformer();
