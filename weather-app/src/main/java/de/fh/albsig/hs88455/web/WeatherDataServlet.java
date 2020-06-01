@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import de.fh.albsig.hs88455.weather.Weather;
@@ -27,7 +28,7 @@ import javax.servlet.annotation.WebServlet;
 public class WeatherDataServlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws 
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws 
 		ServletException, IOException {
 		
 		String cityName = req.getParameter("cityName");
@@ -43,8 +44,11 @@ public class WeatherDataServlet extends HttpServlet {
 		JSONObject main = (JSONObject) jsonObj.get("main");
 		JSONObject sys = (JSONObject) jsonObj.get("sys");
 		JSONObject coord = (JSONObject) jsonObj.get("coord");
-		JSONObject weatherData = (JSONObject) jsonObj.get("weather");
 		JSONObject wind = (JSONObject) jsonObj.get("wind");
+		
+		JSONArray weatherArray = (JSONArray) jsonObj.get("weather");
+		JSONObject weatherData = (JSONObject) weatherArray.get(0);
+		
 		
 		weather.setCityId(jsonObj.getInt("id"));
 		weather.setCountryCode(sys.getString("country"));
@@ -57,14 +61,14 @@ public class WeatherDataServlet extends HttpServlet {
 		weather.setSunrise(sys.getInt("sunrise"));
 		weather.setSunset(sys.getInt("sunset"));
 		weather.setLon(coord.getDouble("lon"));
-		weather.setLat(coord.getDouble("sunset"));
+		weather.setLat(coord.getDouble("lat"));
 		weather.setWindDeg(wind.getInt("deg"));
 		weather.setWindSpeed(wind.getDouble("speed"));
 		
 		PrintWriter output = resp.getWriter();
 		
 		//weather.toxml
-		//output.println(weather.toXML);
+		output.println(weather.toXML());
 		
 		
 		
