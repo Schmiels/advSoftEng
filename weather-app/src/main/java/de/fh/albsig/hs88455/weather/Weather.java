@@ -1,5 +1,7 @@
 package de.fh.albsig.hs88455.weather;
 
+import java.util.Date;
+
 /**
  * Wetter Objekt
  * @author svenb
@@ -16,8 +18,8 @@ public class Weather {
 	private double tempMin;
 	private int humidity;
 	private int pressure;
-	private int sunrise;
-	private int sunset;
+	private Date sunrise;
+	private Date sunset;
 	private double lon;
 	private double lat;
 	private int windDeg;
@@ -99,20 +101,20 @@ public class Weather {
 		this.pressure = pressure;
 	}
 
-	public int getSunrise() {
+	public Date getSunrise() {
 		return sunrise;
 	}
 
 	public void setSunrise(int sunrise) {
-		this.sunrise = sunrise;
+		this.sunrise = new Date(sunrise);
 	}
 
-	public int getSunset() {
+	public Date getSunset() {
 		return sunset;
 	}
 
 	public void setSunset(int sunset) {
-		this.sunset = sunset;
+		this.sunset = new Date(sunset);
 	}
 
 	public double getLon() {
