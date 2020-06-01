@@ -1,6 +1,19 @@
 package de.fh.albsig.hs88455.weather;
 
+import java.io.StringWriter;
 import java.util.Date;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * Wetter Objekt
@@ -147,5 +160,38 @@ public class Weather {
 
 	public void setWindSpeed(double windSpeed) {
 		this.windSpeed = windSpeed;
+	}
+	
+	public String toXML() {
+		try {
+			DocumentBuilderFactory docBuilderFac = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = docBuilderFac.newDocumentBuilder();
+			Document doc = docBuilder.newDocument();
+			Element root = doc.createElement("weatherData");
+			doc.appendChild(root);
+			
+			Element cityName = doc.createElement("cityName");
+			cityName.appendChild(doc.createTextNode(this.getCityName()));
+			root.appendChild(cityName);
+			
+			Element temp = doc.createElement("temp");
+			temp.appendChild(doc.createTextNode(this.getTemp()+""));
+			root.appendChild(temp);
+			
+			TransformerFactory transformerFac = TransformerFactory.newInstance();
+			Transformer transformer = transformerFac.newTransformer();
+			DOMSource transformerSrc = new DOMSource(doc);
+			StringWriter writer = new StringWriter();
+			StreamResult transformerRslt = new StreamResult(writer);
+			transformer.transform(transformerSrc, transformerRslt);
+			
+			return writer.getBuffer().toString();
+		} catch (TransformerException e) {
+			System.out.println(e.toString());
+		} catch (ParserConfigurationException e) {
+			System.out.println(e.toString());
+		}
+		
+		return null;
 	}
 }
