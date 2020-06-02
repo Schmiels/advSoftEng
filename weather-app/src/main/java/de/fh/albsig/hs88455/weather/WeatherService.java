@@ -1,6 +1,5 @@
 package de.fh.albsig.hs88455.weather;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -44,9 +43,9 @@ public class WeatherService {
 		
 		try {
 			HttpGet get = new HttpGet(url);
-			//System.out.println(url);
+
 			CloseableHttpResponse resp = httpClient.execute(get);
-			//System.out.println(resp);
+
 			respBody = EntityUtils.toString(resp.getEntity(), StandardCharsets.UTF_8);
 			
 			resp.close();
@@ -54,7 +53,6 @@ public class WeatherService {
 			JSONObject jsonObj = new JSONObject(respBody);
 			
 			return jsonObj;
-			//System.out.println(jsonObj);
 		} catch (ClientProtocolException e) {
 			System.out.println(e.toString());
 		} catch (IOException e) {
