@@ -27,19 +27,29 @@ import javax.servlet.annotation.WebServlet;
  */
 public class WeatherDataServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6384272787556882954L;
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws 
 		ServletException, IOException {
 		
+		/*
+		 * TODO: Parameterauswertung auf alle Parameter ausweiten
+		 */
 		String cityName = req.getParameter("cityName");
 		
 		WeatherService weatherService = new WeatherService();
 		
+		/*
+		 * TODO: Serviceaufruf an ausgeweitete Parameter anpassen
+		 */
 		JSONObject jsonObj = weatherService.getDataByCityName(cityName);
 		
-		//System.out.println(jsonObj.toString(100));
-		
-		Weather weather = new Weather(cityName);
+		Weather weather = new Weather();
+		weather.setCityName(cityName);
 		
 		JSONObject main = (JSONObject) jsonObj.get("main");
 		JSONObject sys = (JSONObject) jsonObj.get("sys");
