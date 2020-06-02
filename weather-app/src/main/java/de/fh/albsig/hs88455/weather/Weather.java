@@ -38,8 +38,8 @@ public class Weather {
 	private int windDeg;
 	private double windSpeed;
 	
-	public Weather(String cityName) {
-		this.cityName = cityName;
+	public Weather() {
+		
 	}
 
 	public int getCityId() {
