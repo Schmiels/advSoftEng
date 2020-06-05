@@ -1,148 +1,75 @@
-/**
- * 
- */
 package de.fh.albsig.hs88455.weather;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
 /**
+ * Test class for testing the WeatherClass.
+ * 
  * @author svenb
- *
  */
 public class WeatherTest {	
 	
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#Weather(java.lang.String)}.
-	 */
-	@Test
-	public void testWeather() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setCityId(int)}.
-	 */
-	@Test
-	public void testSetCityId() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setCityName(java.lang.String)}.
-	 */
-	@Test
-	public void testSetCityName() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setCountryCode(java.lang.String)}.
-	 */
-	@Test
-	public void testSetCountryCode() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setWeatherDesc(java.lang.String)}.
-	 */
-	@Test
-	public void testSetWeatherDesc() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setTemp(double)}.
-	 */
-	@Test
-	public void testSetTemp() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setTempMax(double)}.
-	 */
-	@Test
-	public void testSetTempMax() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setTempMin(double)}.
-	 */
-	@Test
-	public void testSetTempMin() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setHumidity(int)}.
-	 */
-	@Test
-	public void testSetHumidity() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setPressure(int)}.
-	 */
-	@Test
-	public void testSetPressure() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setSunrise(int)}.
-	 */
-	@Test
-	public void testSetSunrise() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setSunset(int)}.
-	 */
-	@Test
-	public void testSetSunset() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setLon(double)}.
-	 */
-	@Test
-	public void testSetLon() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setLat(double)}.
-	 */
-	@Test
-	public void testSetLat() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setWindDeg(int)}.
-	 */
-	@Test
-	public void testSetWindDeg() {
-		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#setWindSpeed(double)}.
-	 */
-	@Test
-	public void testSetWindSpeed() {
-		//fail("Not yet implemented");
-	}
+	private Weather weatherMock;
+	
+	private Weather weather;
 
 	/**
 	 * Test method for {@link de.fh.albsig.hs88455.weather.Weather#toXML()}.
 	 */
 	@Test
 	public void testToXML() {
-		//fail("Not yet implemented");
+		this.weatherMock = Mockito.mock(Weather.class);
+		String filePath = "example.xml";
+		String expectedOutput = "";
+		
+		try {
+			
+			ClassLoader classLoader = this.getClass().getClassLoader();
+			File file = new File(classLoader.getResource(filePath).getFile());
+			System.out.println(file.toString());
+			
+			expectedOutput = Files.readString(Paths.get(file.toString()));
+			
+			Mockito.when(this.weatherMock.toXML()).thenReturn(expectedOutput);
+			
+			this.weather = new Weather();
+			this.weather.setCityId(2945024);
+			this.weather.setCityName("Braunschweig");
+			this.weather.setCountryCode("DE");
+			this.weather.setWeatherDesc("broken clouds");
+			this.weather.setTemp(290.12);
+			this.weather.setTempMax(290.37);
+			this.weather.setTempMin(289.82);
+			this.weather.setHumidity(48);
+			this.weather.setPressure(1021);
+			this.weather.setSunrise(1591066889);
+			this.weather.setSunset(1591126242);
+			this.weather.setLon(10.53);
+			this.weather.setLat(52.27);
+			this.weather.setWindDeg(360);
+			this.weather.setWindSpeed(1.5);
+			
+			assertEquals(this.weatherMock.toXML(), this.weather.toXML());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (TransformerException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
