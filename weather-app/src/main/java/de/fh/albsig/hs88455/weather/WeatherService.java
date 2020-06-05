@@ -13,19 +13,33 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 /**
- * Weather-Api anfragen
+ * Service for handling openweatherapi-calls.
+ * 
+ * TODO: add more options/methods to perform the api-call with different parameters
+ * 
  * @author svenb
- *
  */
 public class WeatherService {
 	
 	private String apiKey = "0faf94f3aa783dbf3030947b5c36cf41";
 
+	/**
+	 * WeatherService class constructor
+	 */
 	public WeatherService() {
 		
 	}
 	
-	public JSONObject getDataByCityName(String cityName) {
+	/**
+	 * Execute an api-call with a city's name to retrieve the weather data for
+	 * that city.
+	 * 
+	 * @param cityName | String value
+	 * @return city's weather data as a JSONObject
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
+	public JSONObject getDataByCityName(String cityName) throws ClientProtocolException, IOException{
 		
 		String url;
 		String respBody;
@@ -61,12 +75,21 @@ public class WeatherService {
 		
 		return new JSONObject();
 	}
-
-	public String getApiKey() {
+	/**
+	 * Getter method for returning the used api-key.
+	 * 
+	 * @return apiKey | String value
+	 */
+	private String getApiKey() {
 		return apiKey;
 	}
 
-	public void setApiKey(String apiKey) {
+	/**
+	 * Setter method for setting the api-key.
+	 * 
+	 * @param apiKey | String value
+	 */
+	private void setApiKey(String apiKey) {
 		this.apiKey = apiKey;
 	}
 }
