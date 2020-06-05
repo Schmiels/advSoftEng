@@ -1,0 +1,43 @@
+{
+	"coord": {
+		"lon": 10.53,
+		"lat": 52.27
+	},
+	"weather": [
+		{
+			"id": 803,
+			"main": "Clouds",
+			"description": "broken clouds",
+			"icon": "04d"
+		}
+	],
+	"base": "stations",
+	"main": {
+		"temp": 290.12,
+		"feels_like": 288.13,
+		"temp_min": 289.82,
+		"temp_max": 290.37,
+		"pressure": 1021,
+		"humidity": 48
+	},
+	"visibility": 10000,
+	"wind": {
+		"speed": 1.5,
+		"deg": 360
+	},
+	"clouds": {
+		"all": 74
+	},
+	"dt": 1591079940,
+	"sys": {
+		"type": 1,
+		"id": 1318,
+		"country": "DE",
+		"sunrise": 1591066889,
+		"sunset": 1591126242
+	},
+	"timezone": 7200,
+	"id": 2945024,
+	"name": "Braunschweig",
+	"cod": 200
+}
